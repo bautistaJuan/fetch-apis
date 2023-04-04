@@ -1,5 +1,4 @@
 function searchTheProduct(results) {
-    console.log(results);
     const contenedor = document.querySelector(".results");
     contenedor.innerHTML= ''; //hace un efecto refresh al buscar un nuevo producto
     const template = document.querySelector("#results-item-template");
