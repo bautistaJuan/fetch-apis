@@ -38,9 +38,9 @@ body {
     overflow: auto;
 }
 
-.results {
-    font-weight: 400;
-    font-size: 16px;
+.results-text {
+    font-weight: 700;
+    font-size: 20px;
 }
 
 .results-item{
