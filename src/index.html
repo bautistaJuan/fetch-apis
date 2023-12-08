@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fetch - APIs</title>
+    <title>API-ML</title>
+    <link
+      rel="shortcut icon"
+      href="./img/icons8-pedido-en-línea-100.png"
+      type="image/x-icon"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Source+Code+Pro&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./src/style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
 
   <body>
@@ -20,9 +25,14 @@
             type="text"
             name="search"
             class="search-input"
-            placeholder="Escribe lo que quieras buscar aquí..."
+            placeholder="Buscar en Mercado Libre"
           />
-          <button class="search-btn">Buscar</button>
+          <button class="search-btn">
+            <img
+              src="./img/1490793870-user-interface25_82355.ico"
+              alt="Buscar"
+            />
+          </button>
         </form>
       </div>
     </header>
@@ -34,17 +44,14 @@
     </div>
     <template id="results-item-template">
       <div class="results-item">
-        <img src="" alt="" class="results-item-img" />
+        <img alt="" class="results-item-img" />
         <div class="result-item-content">
           <h4 class="results-item-title">Titulo</h4>
-          <div class="result-item-price">$1111</div>
           <p class="results-item-condition">Nuevo</p>
-          <p class="results-item-sell-count">
-            Vendidos: <span class="results-item-sell-count-number"></span>
-          </p>
+          <div class="result-item-price">$1111</div>
         </div>
       </div>
     </template>
-    <script async src="./src/index.js"></script>
+    <script async src="./index.js"></script>
   </body>
 </html>

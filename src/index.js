@@ -1,5 +1,5 @@
 function searchTheProduct(results) {
-  console.log(results);
+  console.log(results.sold_quantity);
   const contenedor = document.querySelector(".results");
   contenedor.innerHTML = ""; //hace un efecto refresh al buscar un nuevo producto
   const template = document.querySelector("#results-item-template");
@@ -10,17 +10,18 @@ function searchTheProduct(results) {
     const conditionEl = template.content.querySelector(
       ".results-item-condition"
     );
-    conditionEl.textContent = r.condition;
+    // Solamente por que no queria hacerlo mas extenso
+    if (r.condition == "new") {
+      conditionEl.textContent = "Nuevo";
+    } else {
+      conditionEl.textContent = r.condition;
+    }
+
     const priceEl = template.content.querySelector(".result-item-price");
     priceEl.textContent = r.price.toLocaleString("es-AR", {
       style: "currency",
       currency: "ARS",
     });
-
-    const vendidasEl = template.content.querySelector(
-      ".results-item-sell-count-number"
-    );
-    vendidasEl.textContent = r.sold_quantity;
 
     const imgEl = template.content.querySelector(".results-item-img");
     imgEl.setAttribute("src", r.thumbnail);
@@ -40,17 +41,18 @@ function productsDefault(results) {
     const conditionEl = template.content.querySelector(
       ".results-item-condition"
     );
-    conditionEl.textContent = r.condition;
+
+    // Solamente por que no queria hacerlo mas extenso
+    if (r.condition == "new") {
+      conditionEl.textContent = "Nuevo";
+    } else {
+      conditionEl.textContent = r.condition;
+    }
     const priceEl = template.content.querySelector(".result-item-price");
     priceEl.textContent = r.price.toLocaleString("es-AR", {
       style: "currency",
       currency: "ARS",
     });
-
-    const vendidasEl = template.content.querySelector(
-      ".results-item-sell-count-number"
-    );
-    vendidasEl.textContent = r.sold_quantity;
 
     const imgEl = template.content.querySelector(".results-item-img");
     imgEl.setAttribute("src", r.thumbnail);
@@ -61,9 +63,6 @@ function productsDefault(results) {
 }
 
 function main() {
-  // electrodomesticos-aires-ac
-  //   VENDIDAS: https://api.mercadolibre.com/sites/MLA/search?sort=sold_quantity_desc
-  //Categorias : https://api.mercadolibre.com/sites/MLA/search?category=MLA1648
   fetch(
     "https://api.mercadolibre.com/sites/MLA/search?category=MLA1648&limit=20"
   )
@@ -74,11 +73,15 @@ function main() {
   formEl.addEventListener("submit", function (e) {
     e.preventDefault();
     const palabraABuscar = e.target.search.value;
-    fetch(
-      `https://api.mercadolibre.com/sites/MLA/search?q=${palabraABuscar}&limit=10`
-    )
-      .then(response => response.json())
-      .then(data => searchTheProduct(data.results));
+    if (palabraABuscar == "") {
+      return false;
+    } else {
+      fetch(
+        `https://api.mercadolibre.com/sites/MLA/search?q=${palabraABuscar}&limit=10`
+      )
+        .then(response => response.json())
+        .then(data => searchTheProduct(data.results));
+    }
   });
 }
 main();
