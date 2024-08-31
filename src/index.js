@@ -13,38 +13,29 @@ function main() {
     e.preventDefault();
     const palabraABuscar = e.target.search.value;
     if (!palabraABuscar) return;
-      fetch(apiProductsSearch + `${palabraABuscar}` + "&limit=10")
-        .then(response => response.json())
-        .then(data => renderItems(data.results));
+    fetch(apiProductsSearch + `${palabraABuscar}` + "&limit=10")
+    .then(response => response.json())
+    .then(data => renderItems(data.results));
   });
   
   // Funtion for render items
   const renderItems = (results)=>{
    for (const r of results) {
-    const titleEl = template.content.querySelector(".results-item-title");
-    titleEl.textContent = r.title;
-    const conditionEl = template.content.querySelector(
-      ".results-item-condition"
-    );
-    // Translate text of condition
-    if (r.condition == "new") {
-      conditionEl.textContent = "Nuevo";
-    } else {
-      conditionEl.textContent = r.condition;
-    }
-     
-    const priceEl = template.content.querySelector(".result-item-price");
-    priceEl.textContent = r.price.toLocaleString("es-AR", {
-      style: "currency",
-      currency: "ARS",
-    });
+      const titleEl = template.content.querySelector(".results-item-title");
+      const priceEl = template.content.querySelector(".result-item-price");
+      titleEl.textContent = r.title;
+      priceEl.textContent = r.price.toLocaleString("es-AR", {
+        style: "currency",
+        currency: "ARS",
+      });
 
-    const imgEl = template.content.querySelector(".results-item-img");
-    imgEl.setAttribute("src", r.thumbnail);
+      const imgEl = template.content.querySelector(".results-item-img");
+      imgEl.setAttribute("src", r.thumbnail);
 
-    const clone = document.importNode(template.content, true); // After fill
+      const clone = document.importNode(template.content, true); // After fill
      
-    contenedor.appendChild(clone); // Take you order
-}   
+      contenedor.appendChild(clone); // Take you order
+    }   
+  }
 }
 main();
